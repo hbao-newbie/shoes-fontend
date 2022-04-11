@@ -8,6 +8,12 @@ const routes = [
         name: "HomePage",
         component: HomePage,
     },
+    // Notfound Page
+    {
+        path: "/:pathMatch(.*)*",
+        name: "NotFound",
+        component: () => import("../views/NotFound.vue"),
+    },
     // Product
     {
         path: "/product",
@@ -32,7 +38,6 @@ const routes = [
         name: "Registration",
         component: () => import("../views/Registration.vue"),
     },
-
 ];
 
 const router = createRouter({
