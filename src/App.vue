@@ -1,16 +1,20 @@
 <script>
+    import HeaderVue from "./components/Header.vue"
+    import FooterVue from "./components/Footer.vue"
     export default {
-
+        components: {
+            HeaderVue,
+            FooterVue,
+        }
     }
 </script>
 
 <template>
-    <h1>Hello Vue</h1>
+    <HeaderVue/>
+    <router-view></router-view>
+    <FooterVue/>
 </template>
 
 <style>
-    .page {
-        max-width: 100px;
-        margin: auto;
-    }
+
 </style>
