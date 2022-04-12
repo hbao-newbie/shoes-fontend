@@ -6,6 +6,8 @@
     <h1>Log in</h1>
 </template>
 
-<style>
-
+<style scoped>
+    h1{
+        text-align: center;
+    }
 </style>

@@ -2,13 +2,23 @@
 <nav class="site-header sticky-top py-1">
   <div class="container d-flex flex-column flex-md-row justify-content-between">
     <router-link :to="{name: 'HomePage'}" class="py-2 ">
-        <i class="fa-solid fa-house"></i>
-        Home
+      <i class="fa-solid fa-house"></i>
+      Home
     </router-link>
-    <router-Link class="py-2 d-md-inline-block" :to="{ name: 'Product' }">Sản phẩm</router-Link>
-    <router-Link class="py-2 d-md-inline-block" :to="{ name: 'Support' }">Hỗ trợ</router-Link>
-    <router-Link class="py-2 d-md-inline-block" :to="{ name: 'Login' }">Đăng nhập</router-Link>
-    <router-Link class="py-2 d-md-inline-block" :to="{ name: 'Registration' }">Đăng ký</router-Link>
+    <router-Link class="py-2 d-md-inline-block" :to="{ name: 'Product' }">
+      Sản phẩm
+    </router-Link>
+    <router-Link class="py-2 d-md-inline-block" :to="{ name: 'Support' }">
+      Hỗ trợ
+    </router-Link>
+    <router-Link class="py-2 d-md-inline-block" :to="{ name: 'Login' }">
+      <i class="fa-solid fa-user"></i>
+      Đăng nhập
+    </router-Link>
+    <router-Link class="py-2 d-md-inline-block" :to="{ name: 'Registration' }">
+      <i class="fa-solid fa-address-card"></i>
+      Đăng ký
+    </router-Link>
   </div>
 </nav>
 </template>
