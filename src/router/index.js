@@ -20,6 +20,18 @@ const routes = [
         name: "Product",
         component: () => import("../views/Product.vue"),
     },
+    // Add product
+    {
+        path: "/addproduct",
+        name: "AddProduct",
+        component: () => import("../views/AddProduct.vue"),
+    },   
+    // Cart
+    {
+        path: "/cart",
+        name: "Cart",
+        component: () => import("../views/Cart.vue"),
+    },
     // Support
     {
         path: "/support",
@@ -31,6 +43,12 @@ const routes = [
         path: "/login",
         name: "Login",
         component: () => import("../views/Login.vue"),
+    },
+    // User
+    {
+        path: "/user",
+        name: "User",
+        component: () => import("../views/User.vue"),
     },
     // Registration
     {

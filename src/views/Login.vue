@@ -1,13 +1,14 @@
-<script>
-
-</script>
-
 <template>
-    <h1>Log in</h1>
+    <h1>Login</h1>
 </template>
+
+<script>
+    
+</script>
 
 <style scoped>
     h1{
+        margin-top: 50px;
         text-align: center;
     }
 </style>
