@@ -1,13 +1,20 @@
-<script>
-
-</script>
-
 <template>
-    <h1>Product</h1>
+    <div class="container">
+        <SearchProductVue class="input-search"/>
+    </div>
 </template>
 
-<style>
-    h1{
-        text-align: center;
+<script>
+import SearchProductVue from "../components/SearchProduct.vue"
+export default {
+    components: {
+        SearchProductVue,
     }
+}
+</script>
+
+<style>
+.input-search {
+    margin: 10px 0 10px;
+}
 </style>
