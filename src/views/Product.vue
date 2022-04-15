@@ -2,7 +2,7 @@
     <div class="container">
         <SearchProductVue class="input-search" v-model="searchText"/>
         <div class="d-flex flex-wrap justify-content-center">
-            <ProductVue
+            <ProductListVue
                 v-if="productCount > 0"
                 :products="filteredProducts"
                 v-model:activeIndex="activeIndex"
@@ -15,11 +15,11 @@
 <script>
 import productService from "../services/product.service";
 import SearchProductVue from "../components/SearchProduct.vue";
-import ProductVue from "../components/Product.vue";
+import ProductListVue from "../components/ProductList.vue";
 export default {
     components: {
         SearchProductVue,
-        ProductVue,
+        ProductListVue,
     },
     data() {
         return {
