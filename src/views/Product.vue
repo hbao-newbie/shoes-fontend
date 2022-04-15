@@ -24,14 +24,8 @@ export default {
     data() {
         return {
             products: [],
-            activeIndex: -1,
             searchText: "",
         };
-    },
-    watch: {
-        searchText() {
-            this.activeIndex = -1;
-        },
     },
     computed: {
         // Chuyển các đối tượng thành chuỗi để tìm kiếm
@@ -62,7 +56,6 @@ export default {
         },
         refreshList() {
             this.retriveProduct();
-            this.activeIndex = -1;
         }
     },
     mounted() {

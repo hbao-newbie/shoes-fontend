@@ -24,7 +24,6 @@
 export default {
     props: {
         products: { type: Array, default: [] },
-        activeIndex: { type: Number, default: -1 },
     },
 };
 </script>
