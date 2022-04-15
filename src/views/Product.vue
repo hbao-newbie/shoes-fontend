@@ -1,12 +1,13 @@
 <template>
     <div class="container">
         <SearchProductVue class="input-search" />
+        <div class="d-flex flex-wrap justify-content-center">
+            <ProductVue
+                :products="products"
+            />
+        </div>
     </div>
-    <div class="d-flex flex-wrap product-list">
-        <ProductVue
-            :products="products"
-        />
-    </div>
+
 </template>
 
 <script>
