@@ -1,9 +1,11 @@
 <template>
     <div class="container">
-        <SearchProductVue class="input-search" />
+        <SearchProductVue class="input-search" v-model="searchText"/>
         <div class="d-flex flex-wrap justify-content-center">
             <ProductVue
-                :products="products"
+                v-if="productCount > 0"
+                :products="filteredProducts"
+                v-model:activeIndex="activeIndex"
             />
         </div>
     </div>
@@ -22,37 +24,33 @@ export default {
     data() {
         return {
             products: [],
-            // activeIndex: -1,
-            // searchText: "",
+            activeIndex: -1,
+            searchText: "",
         };
     },
-    // watch: {
-    //     searchText() {
-    //         this.activeIndex = -1;
-    //     },
-    // },
+    watch: {
+        searchText() {
+            this.activeIndex = -1;
+        },
+    },
     computed: {
         // Chuyển các đối tượng thành chuỗi để tìm kiếm
-        // productStrings() {
-        //     return this.products.map((product) => {
-        //         const { nameProduct, codeProduct } = product;
-        //         return [ nameProduct, codeProduct ].join("");
-        //     });
-        // },
+        productStrings() {
+            return this.products.map((product) => {
+                const { nameProduct, codeProduct } = product;
+                return [ nameProduct, codeProduct ].join("");
+            });
+        },
         // Trả về các đối tượng products cần tìm kiếm
-        // filteredProduct() {
-        //     if (!this.searchText) return this.products;
-        //     return this.products.filter(
-        //         (product, index) => this.productStrings[index].includes(this.searchText)
-        //     );
-        // },
-        // activeProduct() {
-        //     if (this.activeIndex < 0) return null;
-        //     return this.filteredProduct[this.activeIndex];
-        // },
-        // productCount(){
-        //     return this.filteredProduct.length;
-        // }
+        filteredProducts() {
+            if (!this.searchText) return this.products;
+            return this.products.filter(
+                (product, index) => this.productStrings[index].includes(this.searchText)
+            );
+        },
+        productCount(){
+            return this.filteredProducts.length;
+        }
     },
     methods: {
         async retriveProduct(){
@@ -64,7 +62,7 @@ export default {
         },
         refreshList() {
             this.retriveProduct();
-            // this.activeIndex = -1;
+            this.activeIndex = -1;
         }
     },
     mounted() {

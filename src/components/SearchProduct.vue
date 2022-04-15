@@ -4,7 +4,7 @@
             type="text"
             class="form-control"
             placeholder="Tìm kiếm"
-            :value="modeValue"
+            :value="modelValue"
             @input="updateModelValue"
             @keyup.enter="submit"
         />
@@ -23,12 +23,12 @@
 <script>
 export default {
     props: {
-        modeValue: { type: String, default: "" },
+        modelValue: { type: String, default: "" },
     },
     emits: ["submit", "update:modelValue"],
     methods: {
-        updateModelValue(event) {
-            this.$emit("update:modelValue", event.target.value);
+        updateModelValue(e) {
+            this.$emit("update:modelValue", e.target.value);
         },
         submit() {
             this.$emit("submit");
