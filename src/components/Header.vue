@@ -8,9 +8,6 @@
     <router-Link class="py-2 d-md-inline-block" :to="{ name: 'Product' }">
       Sản phẩm
     </router-Link>
-    <router-Link class="py-2 d-md-inline-block" :to="{ name: 'Cart' }">
-      Giỏ hàng
-    </router-Link>
     <router-Link class="py-2 d-md-inline-block" :to="{ name: 'Support' }">
       Hỗ trợ
     </router-Link>

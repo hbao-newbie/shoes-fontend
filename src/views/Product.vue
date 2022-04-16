@@ -1,15 +1,11 @@
 <template>
     <div class="container">
         <SearchProductVue class="input-search" v-model="searchText"/>
-        <div class="d-flex flex-wrap justify-content-center">
-            <ProductListVue
-                v-if="productCount > 0"
-                :products="filteredProducts"
-                v-model:activeIndex="activeIndex"
-            />
-        </div>
     </div>
-
+    <ProductListVue
+        v-if="productCount > 0"
+        :products="filteredProducts"
+    />
 </template>
 
 <script>

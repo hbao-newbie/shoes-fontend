@@ -25,13 +25,7 @@ const routes = [
         path: "/addproduct",
         name: "AddProduct",
         component: () => import("../views/AddProduct.vue"),
-    },   
-    // Cart
-    {
-        path: "/cart",
-        name: "Cart",
-        component: () => import("../views/Cart.vue"),
-    },
+    },  
     // Support
     {
         path: "/support",
