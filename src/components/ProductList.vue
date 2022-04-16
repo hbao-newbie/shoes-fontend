@@ -1,7 +1,6 @@
 <template>
     <div class="dropdown container">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"
-            
         >
             Giỏ hàng {{ countProductCart }}
         </button>
