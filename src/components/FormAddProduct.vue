@@ -9,7 +9,7 @@
                 name="name"
                 type="text"
                 class="form-control"
-                v-model="productLocal.nameProduct"
+                v-model="productLocal.name"
             />
             <ErrorMessage name="name" class="error-feedback"/>
         </div>
@@ -19,7 +19,7 @@
                 name="code"
                 type="text"
                 class="form-control"
-                v-model="productLocal.codeProduct"
+                v-model="productLocal.code"
             />
             <ErrorMessage name="code" class="error-feedback"/>
         </div>
@@ -39,7 +39,7 @@
                 name="imgProduct"
                 type="text"
                 class="form-control"
-                v-model="productLocal.imgProduct"
+                v-model="productLocal.image"
             />
             <ErrorMessage name="imgProduct" class="error-feedback"/>
         </div>
@@ -49,7 +49,7 @@
                 name="cost"
                 type="text"
                 class="form-control"
-                v-model="productLocal.costProduct"
+                v-model="productLocal.cost"
             />
             <ErrorMessage name="cost" class="error-feedback"/>
         </div>

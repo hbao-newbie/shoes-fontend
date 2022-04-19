@@ -2,7 +2,7 @@
     <div class="container">
         <SearchProductVue class="input-search" v-model="searchText"/>
     </div>
-    <ProductListVue
+    <ProductVue
         v-if="productCount > 0"
         :products="filteredProducts"
     />
@@ -11,11 +11,11 @@
 <script>
 import productService from "../services/product.service";
 import SearchProductVue from "../components/SearchProduct.vue";
-import ProductListVue from "../components/ProductList.vue";
+import ProductVue from "../components/Product.vue";
 export default {
     components: {
         SearchProductVue,
-        ProductListVue,
+        ProductVue,
     },
     data() {
         return {
@@ -27,8 +27,8 @@ export default {
         // Chuyển các đối tượng thành chuỗi để tìm kiếm
         productStrings() {
             return this.products.map((product) => {
-                const { nameProduct, codeProduct } = product;
-                return [ nameProduct, codeProduct ].join("");
+                const { name, code } = product;
+                return [ name, code ].join("");
             });
         },
         // Trả về các đối tượng products cần tìm kiếm
