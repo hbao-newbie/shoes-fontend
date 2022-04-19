@@ -68,9 +68,10 @@ const routes = [
     },
     // Edit product
     {
-        path: "/editproduct",
+        path: "/editproduct/:id",
         name: "EditProduct",
         component: () => import("../views/EditProduct.vue"),
+        props: true,
     },
     // User
     {

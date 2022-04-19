@@ -59,7 +59,7 @@ import { useAuthStore } from "../stores/auth.store";
 export default {
   computed: {
     ...mapState(useAuthStore, {
-      currentUser: "user"
+      currentUser: "user",
     }),
   },
   methods: {

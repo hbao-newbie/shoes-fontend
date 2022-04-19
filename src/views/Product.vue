@@ -48,7 +48,7 @@ export default {
                 this.products = await productService.getAll();
             } catch(err) {
                 console.log(err);
-            }
+            }   
         },
         refreshList() {
             this.retriveProduct();

@@ -10,16 +10,24 @@
                 <li class="list-group-item">Email: {{ currentUser.email }}</li>
             </ul>
         </div>
-        <div>
+        <div 
+            class="admin-function mt-2"
+            v-if="currentUser.username === 'admin'"
+        >
+            <h1> Danh sách các sản phẩm </h1>
+            <SearchProductVue
+                class="mt-2"
+                v-model="searchText"
+            />
+            <ProductListVue
+                class="mt-2"
+                v-if="productCount > 0"
+                :products="filteredProducts"
+            />
             <button
-                class="btn btn-primary"
+                class="btn btn-primary mt-2"
                 @click="gotoAddProduct"
             >Thêm sản phẩm
-            </button>
-            <button
-                class="btn btn-primary ml-2"
-                @click="gotoEditProduct"
-            >Chỉnh sửa sản phẩm
             </button>
         </div>
     </div>
@@ -28,25 +36,64 @@
 <script>
 import { mapState } from "pinia";
 import { useAuthStore } from "../stores/auth.store";
+import ProductListVue from "../components/ProductList.vue";
+import SearchProductVue from "../components/SearchProduct.vue";
+import productService from "../services/product.service";
 
 export default {
+    components: {
+    ProductListVue,
+    SearchProductVue,
+    },
+    data() {
+        return {
+            products: [],
+            searchText: "",
+        }
+    },
     computed: {
         ...mapState(useAuthStore,{
             currentUser: "user",
         }),
+        productStrings() {
+            return this.products.map((product) => {
+                const { name, code } = product;
+                return [ name, code ].join("");
+            });
+        },
+        // Trả về các đối tượng products cần tìm kiếm
+        filteredProducts() {
+            if (!this.searchText) return this.products;
+            return this.products.filter(
+                (product, index) => this.productStrings[index].includes(this.searchText)
+            );
+        },
+        productCount(){
+            return this.filteredProducts.length;
+        }
     },
     methods: {
         gotoAddProduct(){
             this.$router.push({ name: "AddProduct"});
         },
-        gotoEditProduct(){
-            this.$router.push({ name: "EditProduct"});
+        async retriveProduct(){
+            try {
+                this.products = await productService.getAll();
+            } catch(err) {
+                console.log(err);
+            }   
         },
+        refreshList() {
+            this.retriveProduct();
+        }
     },
     created() {
         if (!this.currentUser) {
             this.$router.push({ name: "Login"});
         }
+    },
+    mounted() {
+        this.refreshList()
     },
 }
 </script>
@@ -82,4 +129,11 @@ export default {
         text-align: justify;
     }
 
+    .admin-function{
+        margin-top: 10px;
+    }
+
+    h1 {
+        text-align: center;
+    }
 </style>

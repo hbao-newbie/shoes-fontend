@@ -1,10 +1,10 @@
 <template>
     <div class="dropdown container">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"
         >
             Giỏ hàng {{ countProductCart }}
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-menu dropdown-menu-custom" aria-labelledby="dropdownMenuButton">
             <div class="dropdown-item"
                 v-if="!countProductCart"
             >Giỏ hàng rỗng</div>
@@ -93,3 +93,9 @@ export default {
     },
 };
 </script>
+
+<style>
+    .dropdown-menu-custom{
+        margin-top: 10px;
+    }
+</style>
