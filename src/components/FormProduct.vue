@@ -71,10 +71,10 @@
             Lưu
             </button>
             <button
-                v-if="productLocal.id"
+                v-if="productLocal._id"
                 type="button"
                 class="ml-2 btn btn-danger"
-                @click="$emit('delete:product', productLocal.id)"
+                @click="$emit('delete:product', productLocal._id)"
             >
             Xóa
             </button>

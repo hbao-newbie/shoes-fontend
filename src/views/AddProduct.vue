@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h1>Thêm một sản phẩm mới</h1>
-        <FormAddProductVue
+        <FormProductVue
             :product="product"
             @submit:product="addProduct"
         />
@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import FormAddProductVue from "../components/FormAddProduct.vue";
+import FormProductVue from "../components/FormProduct.vue";
 import productService from "../services/product.service";
 
 export default {
     components: {
-        FormAddProductVue,
+        FormProductVue,
     },
     data() {
         return {
