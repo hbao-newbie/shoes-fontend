@@ -10,23 +10,23 @@ class ProductServices {
     };
     // create a new product
     async create(data) {
-        return (await this.api.post("/", data)).data
+        return (await this.api.post("/", data)).data;
     };
     // get a single product with id
     async get(id) {
-        return (await this.api.get(`/${id}`)).data
+        return (await this.api.get(`/${id}`)).data;
     };
     // update product with id
     async update(id, data) {
-        return (await this.api.put(`/${id}`, data)).data
+        return (await this.api.put(`/${id}`, data)).data;
     };
     // delete product with id
     async delete(id) {
-        return (await this.api.delete(`/${id}`)).data
+        return (await this.api.delete(`/${id}`)).data;
     };
     // delete all product
     async deleteAll() {
-        return (await this.api.delete("/")).data
+        return (await this.api.delete("/")).data;
     };
 };
 

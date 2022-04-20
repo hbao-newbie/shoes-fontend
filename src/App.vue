@@ -14,7 +14,3 @@
     <router-view></router-view>
     <FooterVue/>
 </template>
-
-<style>
-
-</style>

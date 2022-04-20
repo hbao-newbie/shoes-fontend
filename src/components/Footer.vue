@@ -1,4 +1,5 @@
 <template>
+    <div class="raw"></div>
     <footer class="container py-5">
     <div class="row">
         <div class="col-6 col-md">
@@ -40,3 +41,11 @@
     </div>
     </footer>
 </template>
+
+<style scoped>
+.raw {
+    margin-top: 10px;
+    height: 1px;
+    background-color: cadetblue;
+}
+</style>

@@ -12,8 +12,8 @@
         </div>
         <div v-if="currentUser">
             <div 
-            class="admin-function mt-2"
-            v-if="adminUser"
+                class="admin-function mt-2"
+                v-if="adminUser"
             >
                 <h1> Danh sách các sản phẩm </h1>
                 <SearchProductVue
@@ -31,8 +31,35 @@
                 >Thêm sản phẩm
                 </button>
             </div>
+            <div
+                class="admin-function mt-2"
+                v-if="!adminUser"
+            >
+                <h1> Danh sách các đơn hàng của bạn</h1>
+                <div 
+                    v-for="(cartItemList, index) in cartList"
+                    :key="cartList.id"
+                > 
+                    <h3> Đơn hàng {{index + 1}}</h3>
+                    <div
+                        class="d-flex"
+                        v-for="cart in cartItemList.cartItem" :key="cart.id"
+                    >
+                        <div class="p-2">
+                            <img :src="`/products/${cart.image}.jpg`" style="width: 5rem;">
+                        </div>
+                        <div class="p-2 flex-shrink-1">
+                            <h5>{{ cart.name }}</h5>
+                            <p>Giá {{ cart.cost }} VND</p>
+                        </div>
+                    </div>
+                    <p>Đại chỉ giao hàng: {{ cartItemList.cartAddress}} </p>
+                    <p>Số điện thoại nhận hàng: {{ cartItemList.cartPhone }}</p>
+                    <h5>Tổng đơn {{ cartItemList.cartCost }} VND</h5>
+                    <p><i>Đang giao</i></p>
+                </div>
+            </div>
         </div>
-
     </div>
 </template>
 
@@ -42,6 +69,7 @@ import { useAuthStore } from "../stores/auth.store";
 import ProductListVue from "../components/ProductList.vue";
 import SearchProductVue from "../components/SearchProduct.vue";
 import productService from "../services/product.service";
+import cartService from "../services/cart.service";
 
 export default {
     components: {
@@ -51,6 +79,7 @@ export default {
     data() {
         return {
             products: [],
+            cartList: [],
             searchText: "",
         }
     },
@@ -90,7 +119,15 @@ export default {
                 console.log(err);
             }   
         },
+        async retriveCart() {
+            try {
+                this.cartList = await cartService.getAll();
+            } catch (error) {
+                console.log(error);
+            }
+        },
         refreshList() {
+            this.retriveCart()
             this.retriveProduct();
         }
     },
@@ -133,6 +170,7 @@ export default {
     }
 
     div[data-v-e0b47cf6] {
+        margin-top: 0px;
         text-align: justify;
     }
 
@@ -142,5 +180,10 @@ export default {
 
     h1 {
         text-align: center;
+    }
+
+    h3 {
+        padding-bottom: 5px;
+        border-bottom: 1px solid navajowhite;
     }
 </style>

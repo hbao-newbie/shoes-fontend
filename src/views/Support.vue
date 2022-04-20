@@ -30,18 +30,11 @@
                 Shoes store không mong muốn bạn sử dụng bất kỳ chương trình, công cụ hay hình thức nào khác để can thiệp vào nội dung, hệ thống hay làm thay đổi cấu trúc dữ liệu của website chúng tôi. Các hình thức phát tán, truyền bá, cổ vũ không được phép hay can thiệp, thay đổi, xóa bỏ nội dung, cấu trúc dữ liệu hệ thống của chúng tôi một cách bất hợp pháp đều sẽ có hình thức xử lý từ Shoes store. Mọi cá nhân hoặc tổ chức nếu vi phạm sẽ chịu truy tố trước pháp luật và phải bồi thường thiệt hại đã gây ra.</p>
             </div>
         </div>
-        <div class="draw"></div>
     </div>
 </template>
 
 <style>
 .box{
     margin-top: 10px;
-}
-
-.draw{
-    width: 100%;
-    height: 1px;
-    background-color: gray;
 }
 </style>

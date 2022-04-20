@@ -28,7 +28,9 @@
                 v-if="countProductCart"
             >
                 <p class="mr-1">Tổng hóa đơn: {{ cost }}</p>
-                <button class="btn btn-primary mr-1">Đặt hàng</button>
+                <button class="btn btn-primary mr-1"
+                    @click="handleGoToCart"
+                >Đặt hàng</button>
                 <button class="btn btn-danger"
                     @click="removeAllCart"
                 >Xóa</button>
@@ -62,6 +64,9 @@
 </template>
 
 <script>
+import { mapActions } from "pinia";
+import { useCartStore } from "../stores/cart.store";
+
 export default {
     props: {
         products: { type: Array, default: [] },
@@ -78,6 +83,7 @@ export default {
         },
     },
     methods: {
+        ...mapActions(useCartStore, ["gotoCart"]),
         addProductToCart(index) {
             this.cartList.push(this.products[index]);
             this.cost += Number.parseInt(this.products[index].cost);
@@ -89,6 +95,10 @@ export default {
         removeAllCart() {
             this.cost = 0;
             this.cartList = [];
+        },
+        handleGoToCart() {
+            this.gotoCart(this.cartList, this.cost);
+            this.$router.push({ name: "Carts" });
         }
     },
 };
