@@ -10,26 +10,29 @@
                 <li class="list-group-item">Email: {{ currentUser.email }}</li>
             </ul>
         </div>
-        <div 
+        <div v-if="currentUser">
+            <div 
             class="admin-function mt-2"
-            v-if="currentUser.username === 'admin'"
-        >
-            <h1> Danh sách các sản phẩm </h1>
-            <SearchProductVue
-                class="mt-2"
-                v-model="searchText"
-            />
-            <ProductListVue
-                class="mt-2"
-                v-if="productCount > 0"
-                :products="filteredProducts"
-            />
-            <button
-                class="btn btn-primary mt-2"
-                @click="gotoAddProduct"
-            >Thêm sản phẩm
-            </button>
+            v-if="adminUser"
+            >
+                <h1> Danh sách các sản phẩm </h1>
+                <SearchProductVue
+                    class="mt-2"
+                    v-model="searchText"
+                />
+                <ProductListVue
+                    class="mt-2"
+                    v-if="productCount > 0"
+                    :products="filteredProducts"
+                />
+                <button
+                    class="btn btn-primary mt-2"
+                    @click="gotoAddProduct"
+                >Thêm sản phẩm
+                </button>
+            </div>
         </div>
+
     </div>
 </template>
 
@@ -70,6 +73,10 @@ export default {
         },
         productCount(){
             return this.filteredProducts.length;
+        },
+        adminUser() {
+            if(this.currentUser.username === "admin") return true;
+            return false;
         }
     },
     methods: {
