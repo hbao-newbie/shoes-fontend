@@ -38,7 +38,7 @@
                     class="form-control"
                     v-model="address"
                 />
-                <ErrorMessage name="phone" class="error-feedback"/>
+                <ErrorMessage name="address" class="error-feedback"/>
             </div>
         </Form>
         <h3>Tổng thu {{ cartCost }} VND</h3>
@@ -115,5 +115,7 @@ export default {
     h1{
         margin-top: 10px;
         text-align: center;
+        padding-bottom: 5px;
+        border-bottom: 1px solid lightcoral;
     }
 </style>
