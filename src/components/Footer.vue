@@ -48,4 +48,12 @@
     height: 1px;
     background-color: cadetblue;
 }
+
+a{
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
 </style>

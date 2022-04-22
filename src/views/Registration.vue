@@ -36,7 +36,7 @@
 						<ErrorMessage name="password" class="error-feedback" />
 					</div>
 
-					<div class="form-group">
+					<div class="form-group margin">
 						<button
 							class="btn btn-primary btn-block"
 							:disabled="loading"
@@ -128,4 +128,7 @@ export default {
 
 <style>
 @import "../assets/form.css";
+.margin {
+    margin-top: 15px;
+}
 </style>

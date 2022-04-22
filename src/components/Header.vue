@@ -109,4 +109,8 @@ export default {
   color: #fff;
 }
 
+a{
+    text-decoration: none;
+}
+
 </style>

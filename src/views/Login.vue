@@ -30,7 +30,7 @@
                 <!--  -->
                 <div class="form-group">
 					<button
-						class="btn btn-primary btn-block"
+						class="btn btn-primary btn-block margin"
 						:disabled="loading"
 					>
 						<span
@@ -103,4 +103,7 @@ export default {
 
 <style scoped>
 @import "../assets/form.css";
+.margin {
+    margin-top: 15px;
+}
 </style>

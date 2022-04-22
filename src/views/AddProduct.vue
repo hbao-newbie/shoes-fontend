@@ -7,7 +7,6 @@
         />
         <p>{{ message }}</p>
     </div>
-    <div class="container box"></div>
 </template>
 
 <script>
@@ -46,12 +45,5 @@ export default {
 h1 {
     margin: 20px 0px 20px;
     text-align: center;
-}
-
-.box {
-    margin: 20px auto 20px;
-    width: 100%;
-    height: 2px;
-    background-color: gray;
 }
 </style>

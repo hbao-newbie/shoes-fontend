@@ -28,8 +28,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .list-group-item-custom {
         background-color: rgba(0,0,0,.125);
+    }
+    
+    a{
+        text-decoration: underline;
     }
 </style>

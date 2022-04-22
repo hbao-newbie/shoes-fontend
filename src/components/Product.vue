@@ -1,34 +1,38 @@
 <template>
     <div class="dropdown container">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"
+        <button class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"
         >
+            <i class="fa-solid fa-cart-shopping"></i>
             Giỏ hàng {{ countProductCart }}
         </button>
-        <div class="dropdown-menu dropdown-menu-custom" aria-labelledby="dropdownMenuButton">
-            <div class="dropdown-item"
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-body"
                 v-if="!countProductCart"
             >Giỏ hàng rỗng</div>
-            <div class="dropdown-item"
-                v-for="(cartItem, index) in cartList"
-            >
-                <div class="d-flex">
-                    <div class="p-2">
-                        <img :src="`/products/${cartItem.image}.jpg`" style="width: 7rem;">
-                    </div>
-                    <div class="p-2 flex-shrink-1">
-                        <h5>{{ cartItem.name }}</h5>
-                        <p>{{ cartItem.cost }}</p>
-                        <button class="btn btn-danger"
-                            @click="removeItemCart(index)"
-                        >Xóa</button>
+            <div class="offcanvas-body">
+                <div 
+                    v-for="(cartItem, index) in cartList"
+                >
+                    <div class="d-flex">
+                        <div class="p-2">
+                            <img :src="`/products/${cartItem.image}.jpg`" style="width: 9rem;">
+                        </div>
+                        <div class="p-2 flex-shrink-1">
+                            <h5>{{ cartItem.name }}</h5>
+                            <p>{{ cartItem.cost }}</p>
+                            <button class="btn btn-danger"
+                                @click="removeItemCart(index)"
+                            >Xóa</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="dropdown-item"
+            <div
+                class="bottom-cart"
                 v-if="countProductCart"
             >
                 <p class="mr-1">Tổng hóa đơn: {{ cost }}</p>
-                <button class="btn btn-primary mr-1"
+                <button class="btn btn-primary margin"
                     @click="handleGoToCart"
                 >Đặt hàng</button>
                 <button class="btn btn-danger"
@@ -45,7 +49,7 @@
         >
             <div class="card">
                 <img :src="`/products/${product.image}.jpg`" style="width: 18rem;" class="card-img-top">
-                <div class="card-body" style="height: 250px;">
+                <div class="card-body" style="height: 200px;">
                     <h5 class="card-title">{{ product.name }}</h5>
                     <p class="card-text">{{ product.description }}</p>
                 </div>
@@ -104,8 +108,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
     .dropdown-menu-custom{
         margin-top: 10px;
+    }
+    .bottom-cart{
+        padding: 20px;
+    }
+    .margin{
+        margin-right: 10px;
     }
 </style>

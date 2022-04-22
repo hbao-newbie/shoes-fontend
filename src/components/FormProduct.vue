@@ -66,20 +66,20 @@
         </div>
         <div class="form-group">
             <button
-                class="btn btn-primary"
+                class="btn btn-primary margin"
             >
             Lưu
             </button>
             <button
                 v-if="productLocal._id"
                 type="button"
-                class="ml-2 btn btn-danger"
+                class="ml-2 btn btn-danger margin"
                 @click="$emit('delete:product', productLocal._id)"
             >
             Xóa
             </button>
             <button
-                class="ml-2 btn btn-primary"
+                class="ml-2 btn btn-primary margin"
                 @click="gobackAdmin"
             >
             Quay lại
@@ -128,4 +128,8 @@ export default {
 
 <style scoped>
 @import "../assets/form.css";
+.margin{
+    margin-top: 5px;
+    margin-right: 10px;
+}
 </style>
