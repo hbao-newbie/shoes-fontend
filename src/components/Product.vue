@@ -150,7 +150,6 @@ export default {
         },
     },
     methods: {
-        ...mapActions(useCartStore, ["gotoCart", "gotoCost"]),
         addProductToCart(index) {
             this.cartList.push(this.products[index]);
             this.cost += Number.parseInt(this.products[index].cost);
