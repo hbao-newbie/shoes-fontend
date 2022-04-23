@@ -1,21 +1,21 @@
 <template>
     <div class="container container-custom">
-        <h2 v-if="currentUser" class="user-custom bg-light"> {{ currentUser.username }} </h2>
-        <div 
-            v-if="currentUser"
-            class="card card-custom" style="max-width: 18rem;"
-        >
-            <div class="card-header header-custom"> Thông tin người dùng</div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Email: {{ currentUser.email }}</li>
-            </ul>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-7">
+                <div class="card p-3 py-4">
+                    <div class="text-center"> <img src="/products/img1.jpg" width="100" class="rounded-circle"> </div>
+                    <div class="text-center mt-3"> <span class="bg-secondary p-1 px-4 rounded text-white">{{ currentUser.username }}</span>
+                        <h5 class="mt-2 mb-0">{{currentUser.email}}</h5>
+                </div>
+            </div>
         </div>
+    </div>
         <div v-if="currentUser">
             <div 
                 class="admin-function mt-2"
                 v-if="adminUser"
             >
-                <h1> Danh sách các sản phẩm </h1>
+                <h2> Danh sách các sản phẩm </h2>
                 <SearchProductVue
                     class="mt-2"
                     v-model="searchText"
@@ -35,8 +35,8 @@
                 class="admin-function mt-2"
                 v-if="!adminUser"
             >
-                <h1> Danh sách các đơn hàng của bạn</h1>
-                <div 
+                <h2> Danh sách các đơn hàng của bạn</h2>          
+                <div
                     v-for="(cartItemList, index) in cartList"
                     :key="cartList.id"
                 > 
@@ -55,8 +55,13 @@
                     </div>
                     <p>Đại chỉ giao hàng: {{ cartItemList.cartAddress}} </p>
                     <p>Số điện thoại nhận hàng: {{ cartItemList.cartPhone }}</p>
+                    <p>Tình trạng: <i>Đang giao</i></p>
                     <h5>Tổng đơn {{ cartItemList.cartCost }} VND</h5>
-                    <p><i>Đang giao</i></p>
+                    <button class="btn btn-danger margin-bottom"
+                        @click="deleteCart(cartItemList._id)"
+                    >
+                    Hủy đơn
+                    </button>
                 </div>
             </div>
         </div>
@@ -64,6 +69,7 @@
 </template>
 
 <script>
+import { swtoast, swalert } from "@/mixins/swal.mixin";
 import { mapState } from "pinia";
 import { useAuthStore } from "../stores/auth.store";
 import ProductListVue from "../components/ProductList.vue";
@@ -126,6 +132,32 @@ export default {
                 console.log(error);
             }
         },
+        deleteCart(id) {
+            swalert
+				.fire({
+					title: "Hủy đơn hàng",
+					icon: "warning",
+					text: "Bạn muốn hủy đơn?",
+					showCloseButton: true,
+					showCancelButton: true,
+				})
+				.then(async (result) => {
+					if (result.isConfirmed) {
+						try {
+							await cartService.delete(id);
+							swtoast.success({
+								text: "Hủy đơn thành công",
+							});
+							this.$router.push({ name: "Product" });
+						} catch (error) {
+							console.log(error);
+							swtoast.error({
+								text: "Đã có lỗi xảy ra.",
+							});
+						}
+					}
+				});
+        },
         refreshList() {
             this.retriveCart()
             this.retriveProduct();
@@ -143,28 +175,17 @@ export default {
 </script>
 
 <style scoped>
-    div{
+    /* div{
         margin-top: 100px;
         text-align: center;
-    }
-
-    .header-custom {
-        margin-top: 0;
-    }
-
-    .card-custom {
-        margin-top: 10px;
-    }
-
-    .user-custom {
-        padding: 0;
-        font-size: 40px;
-        height: 50px;
+    } */
+    .box{
+        width: 100px;
+        height: 100px;
+        background-color: aqua;
+        border-radius: 50%;
         text-align: center;
-        border: 1px solid rgba(0,0,0,.125);
-        border-radius: 3px;
     }
-
     .container-custom {
         margin-top: 10px;
     }
@@ -178,12 +199,21 @@ export default {
         margin-top: 10px;
     }
 
-    h1 {
+    h2 {
         text-align: center;
     }
 
     h3 {
         padding-bottom: 5px;
-        border-bottom: 1px solid navajowhite;
+        border-top: 2px solid navajowhite;
+        border-bottom: 2px solid navajowhite;
+    }
+
+    i{
+        color: blue;
+    }
+
+    .margin-bottom{
+        margin-bottom: 10px;
     }
 </style>

@@ -8,9 +8,11 @@ export const useCartStore = defineStore("cart", {
         };
     },
     actions: {
-        gotoCart(carts, cost) {
-            this.carts = carts;
-            this.cost = cost;
+        gotoCart(carts) {
+            return this.carts = carts;
+        },
+        gotoCost(cost) {
+            return this.cost = cost;
         }
     }
 });

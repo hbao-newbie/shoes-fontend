@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { swtoast, swalert } from "@/mixins/swal.mixin";
 import FormProductVue from "../components/FormProduct.vue";
 import productService from "../services/product.service";
 export default {
@@ -45,21 +46,43 @@ export default {
         async updateProduct(data) {
             try {
                 await productService.update(this.product._id, data);
-                this.message = "Liên hệ được cập nhật thành công.";
+                swtoast.success({
+					text: "Liên hệ được cập nhật thành công.",
+				});
                 this.$router.push({ name: "User" });
             } catch (error) {
                 console.log(error);
+                console.log(error);
+				swtoast.error({
+					text: "Đã có lỗi xảy ra.",
+				});
             }
         },
         async deleteProduct() {
-            if( confirm("Bạn có muốn xóa sản phẩm này?")) {
-                try {
-                    await productService.delete(this.product._id);
-                    this.$router.push({ name: "User" })
-                } catch (error) {
-                    console.log(error);
-                }
-            }
+            swalert
+				.fire({
+					title: "Xóa Liên hệ",
+					icon: "warning",
+					text: "Bạn muốn xóa sản phẩm này?",
+					showCloseButton: true,
+					showCancelButton: true,
+				})
+				.then(async (result) => {
+					if (result.isConfirmed) {
+						try {
+							await productService.delete(this.product._id);
+							swtoast.success({
+								text: "Sản phẩm được xóa thành công.",
+							});
+							this.$router.push({ name: "User" });
+						} catch (error) {
+							console.log(error);
+							swtoast.error({
+								text: "Đã có lỗi xảy ra.",
+							});
+						}
+					}
+				});
         }
     },
     created() {

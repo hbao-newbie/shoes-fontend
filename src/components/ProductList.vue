@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import productService from "../services/product.service"
 export default {
     props: {
         products: { type: Array, default: [] },

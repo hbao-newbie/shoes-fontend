@@ -5,20 +5,24 @@
             <i class="fa-solid fa-cart-shopping"></i>
             Giỏ hàng {{ countProductCart }}
         </button>
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas offcanvas-start offcanvas-custom" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Giỏ hàng</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
             <div class="offcanvas-body"
                 v-if="!countProductCart"
                 style="font-size: 30px;"
             >
-            <i class="fa-regular fa-face-sad-tear"></i>
-            Giỏ hàng rỗng</div>
+            <i class="fa-regular fa-face-kiss-wink-heart"></i>
+            Hãy chọn những mặc hàng bạn yêu thích!</div>
             <div class="offcanvas-body">
                 <div 
                     v-for="(cartItem, index) in cartList"
                 >
                     <div class="d-flex">
                         <div class="p-2">
-                            <img :src="`/products/${cartItem.image}.jpg`" style="width: 9rem;">
+                            <img :src="`/products/${cartItem.image}.jpg`" style="width: 7rem;">
                         </div>
                         <div class="p-2 flex-shrink-1">
                             <h5>{{ cartItem.name }}</h5>
@@ -34,13 +38,40 @@
                 class="bottom-cart"
                 v-if="countProductCart"
             >
-                <p class="mr-1">Tổng hóa đơn: {{ cost }} VND</p>
-                <button class="btn btn-primary margin"
-                    @click="handleGoToCart"
-                >Đặt hàng</button>
-                <button class="btn btn-danger"
-                    @click="removeAllCart"
-                >Xóa</button>
+                <Form
+                    @submit="submitCart"
+                    :validation-schema="cartFormSchema"
+                >
+                    <div class="form-group">
+                        <label for="phone">Nhập số điện thoại của bạn</label>
+                        <Field
+                            name="phone"
+                            type="text"
+                            class="form-control"
+                            v-model="phone"
+                        />
+                        <ErrorMessage name="phone" class="error-feedback"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Nhập địa chỉ giao hàng</label>
+                        <Field
+                            name="address"
+                            type="text"
+                            class="form-control"
+                            v-model="address"
+                        />
+                        <ErrorMessage name="address" class="error-feedback"/>
+                    </div>
+                    <p class="mr-1">Tổng hóa đơn: {{ cost }} VND</p>
+                    <button
+                        class="btn btn-success"
+                    > Xác nhận đơn </button>
+                    <button
+                        class="btn btn-danger margin-left"
+                        @click="removeAllCart"
+                    > Xóa</button>
+                </Form>
+                
             </div>
         </div>
     </div>
@@ -78,17 +109,40 @@
 </template>
 
 <script>
+import { swtoast } from "@/mixins/swal.mixin";
 import { mapActions } from "pinia";
 import { useCartStore } from "../stores/cart.store";
+import { Form, Field, ErrorMessage } from "vee-validate";
+import cartService from "../services/cart.service";
+import * as yup from "yup";
 
 export default {
+    components: {
+        Form,
+        Field,
+        ErrorMessage,
+    },
     props: {
         products: { type: Array, default: [] },
     },
     data() {
+        const cartFormSchema = yup.object().shape({
+            phone: yup
+                .string()
+                .required("Hãy nhập số điện thoại"),
+            address: yup
+                .string()
+                .required("Hãy nhập địa chỉ giao hàng")
+                .min(12, "Địa chỉ không được dưới 12 ký tự"),
+        })
+
         return {
+            data: {},
             cartList: [],
             cost: 0,
+            phone: "",
+            address: "",
+            cartFormSchema,
         }
     },
     computed: {
@@ -97,10 +151,13 @@ export default {
         },
     },
     methods: {
-        ...mapActions(useCartStore, ["gotoCart"]),
+        ...mapActions(useCartStore, ["gotoCart", "gotoCost"]),
         addProductToCart(index) {
             this.cartList.push(this.products[index]);
             this.cost += Number.parseInt(this.products[index].cost);
+            swtoast.success({
+					text: "Thêm sản phẩm thành công.",
+			});
         },
         removeItemCart(index) {
             this.cost -= Number.parseInt(this.products[index].cost);
@@ -110,15 +167,25 @@ export default {
             this.cost = 0;
             this.cartList = [];
         },
-        handleGoToCart() {
-            this.gotoCart(this.cartList, this.cost);
-            this.$router.push({ name: "Carts" });
+        submitCart() {
+            try {
+                this.data.cartItem = this.cartList;
+                this.data.cartCost = this.cost;
+                this.data.cartPhone = this.phone;
+                this.data.cartAddress = this.address;
+                cartService.create(this.data);
+                this.$router.push({ name: "User" });
+            } catch (error) {
+                console.log(error)
+            }
+            
         }
     },
 };
 </script>
 
 <style scoped>
+    
     .dropdown-menu-custom{
         margin-top: 10px;
     }
@@ -136,5 +203,17 @@ export default {
     }
     .cart-custom{
         margin-left: 15px;
+    }
+
+    .offcanvas-custom {
+        width: 600px;
+    }
+
+    .error-feedback{
+        color: red;
+    }
+
+    .margin-left{
+        margin-left: 10px;
     }
 </style>

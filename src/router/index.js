@@ -73,12 +73,6 @@ const routes = [
         component: () => import("../views/EditProduct.vue"),
         props: true,
     },
-    // Add cart
-    {
-        path: "/carts",
-        name: "Carts",
-        component: () => import("../views/Carts.vue"),
-    },
     // User
     {
         path: "/user",

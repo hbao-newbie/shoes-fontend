@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { swtoast } from "@/mixins/swal.mixin";
 import FormProductVue from "../components/FormProduct.vue";
 import productService from "../services/product.service";
 
@@ -29,9 +30,14 @@ export default {
         async addProduct(data) {
             try {
                 await productService.create(this.product, data);
-                this.message = "Thêm sản phẩm thành công!"
+                swtoast.success({
+					text: "Thêm sản phẩm thành công.",
+				});
             } catch (err) {
                 console.log(err);
+                swtoast.error({
+					text: "Đã có lỗi xảy ra.",
+				});
             }
         }
     },
