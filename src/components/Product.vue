@@ -111,7 +111,6 @@
 <script>
 import { swtoast } from "@/mixins/swal.mixin";
 import { mapActions } from "pinia";
-import { useCartStore } from "../stores/cart.store";
 import { Form, Field, ErrorMessage } from "vee-validate";
 import cartService from "../services/cart.service";
 import * as yup from "yup";
