@@ -38,7 +38,7 @@
 
 					<div class="form-group margin">
 						<button
-							class="btn btn-primary btn-block"
+							class="btn btn-secondary btn-block"
 							:disabled="loading"
 						>
 							<span

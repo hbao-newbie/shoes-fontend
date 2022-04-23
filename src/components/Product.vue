@@ -200,7 +200,7 @@ export default {
         color: red;
     }
     .cart-custom{
-        margin-left: 15px;
+        margin-left: 13px;
     }
 
     .offcanvas-custom {

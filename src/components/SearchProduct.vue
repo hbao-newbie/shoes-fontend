@@ -1,5 +1,5 @@
 <template>
-    <div class="input-group mb-3">
+    <div class="input-group mb-3 container">
         <input
             type="text"
             class="form-control"

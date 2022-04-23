@@ -27,10 +27,13 @@
 					/>
 					<ErrorMessage name="password" class="error-feedback" />
 				</div>
+                <div class="registration">
+                    <router-link :to="{name: 'Registration'}" >Bạn chưa có tài khoản ?</router-link>
+                </div>
                 <!--  -->
                 <div class="form-group">
 					<button
-						class="btn btn-primary btn-block margin"
+						class="btn btn-secondary btn-block margin"
 						:disabled="loading"
 					>
 						<span
@@ -105,5 +108,16 @@ export default {
 @import "../assets/form.css";
 .margin {
     margin-top: 15px;
+}
+.registration{
+    margin-top: 10px;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
 }
 </style>
