@@ -25,13 +25,13 @@
         </div>
         <div class="form-group">
             <label for="description">Mô tả</label>
-            <Field
+            <textarea cols="30" rows="5"
                 name="description"
                 type="text"
                 class="form-control"
                 v-model="productLocal.description"
-            />
-            <ErrorMessage name="description" class="error-feedback"/>
+            >
+            </textarea>
         </div>
         <div class="form-group">
             <label for="imgProduct">Tên hình ảnh sản phẩm</label>
@@ -121,7 +121,7 @@ export default {
     methods: {
         gobackAdmin() { 
             this.$router.push({ name: "User" });
-        }
+        },
     },
 }
 </script>

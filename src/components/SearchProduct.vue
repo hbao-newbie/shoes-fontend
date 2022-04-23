@@ -1,5 +1,5 @@
 <template>
-    <div class="input-group">
+    <div class="input-group mb-3">
         <input
             type="text"
             class="form-control"
@@ -8,15 +8,14 @@
             @input="updateModelValue"
             @keyup.enter="submit"
         />
-        <div class="input-group-append">
-            <button
+        <button
                 class="btn btn-outline-secondary"
                 type="button"
+                id="button-addon2"
                 @click="submit"
             >
             <i class="fas fa-search"></i> Tìm kiếm
-            </button>
-        </div>
+        </button>
     </div>
 </template>
 

@@ -52,7 +52,7 @@ export default {
             }
         },
         async deleteProduct() {
-            if( confirm("Bạn có muốn xóa liên hệ này?")) {
+            if( confirm("Bạn có muốn xóa sản phẩm này?")) {
                 try {
                     await productService.delete(this.product._id);
                     this.$router.push({ name: "User" })

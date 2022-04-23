@@ -1,6 +1,6 @@
 <template>
     <div class="dropdown container">
-        <button class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"
+        <button class="btn btn-primary cart-custom" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"
         >
             <i class="fa-solid fa-cart-shopping"></i>
             Giỏ hàng {{ countProductCart }}
@@ -8,7 +8,10 @@
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
             <div class="offcanvas-body"
                 v-if="!countProductCart"
-            >Giỏ hàng rỗng</div>
+                style="font-size: 30px;"
+            >
+            <i class="fa-regular fa-face-sad-tear"></i>
+            Giỏ hàng rỗng</div>
             <div class="offcanvas-body">
                 <div 
                     v-for="(cartItem, index) in cartList"
@@ -19,7 +22,7 @@
                         </div>
                         <div class="p-2 flex-shrink-1">
                             <h5>{{ cartItem.name }}</h5>
-                            <p>{{ cartItem.cost }}</p>
+                            <p>Giá {{ cartItem.cost }} VND</p>
                             <button class="btn btn-danger"
                                 @click="removeItemCart(index)"
                             >Xóa</button>
@@ -31,7 +34,7 @@
                 class="bottom-cart"
                 v-if="countProductCart"
             >
-                <p class="mr-1">Tổng hóa đơn: {{ cost }}</p>
+                <p class="mr-1">Tổng hóa đơn: {{ cost }} VND</p>
                 <button class="btn btn-primary margin"
                     @click="handleGoToCart"
                 >Đặt hàng</button>
@@ -45,11 +48,11 @@
         <div
             v-for="(product, index) in products"
             :key="product.id"
-            class="p-2" style="width: 19rem;"
+            class="p-2" style="width: 16rem;"
         >
             <div class="card">
-                <img :src="`/products/${product.image}.jpg`" style="width: 18rem;" class="card-img-top">
-                <div class="card-body" style="height: 200px;">
+                <img :src="`/products/${product.image}.jpg`" style="width: 15rem;" class="card-img-top">
+                <div class="card-body" style="height: 220px;">
                     <h5 class="card-title">{{ product.name }}</h5>
                     <p class="card-text">{{ product.description }}</p>
                 </div>
@@ -59,8 +62,15 @@
                 </ul>
                 <div class="card-body">
                     <button class="btn btn-primary"
+                        v-if="product.status"
                         @click="addProductToCart(index)"
                     >Thêm vào giỏ hàng</button>
+                    <button class="btn btn-danger"
+                        v-if="!product.status"
+                    >
+                        <i class="fa-regular fa-face-sad-cry"></i>
+                        Hết hàng 
+                    </button>
                 </div>
             </div>
         </div>
@@ -117,5 +127,14 @@ export default {
     }
     .margin{
         margin-right: 10px;
+    }
+    .product{
+        color: blue;
+    }
+    .product-none{
+        color: red;
+    }
+    .cart-custom{
+        margin-left: 15px;
     }
 </style>

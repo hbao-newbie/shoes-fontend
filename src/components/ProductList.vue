@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import productService from "../services/product.service"
 export default {
     props: {
         products: { type: Array, default: [] },
@@ -34,6 +35,10 @@ export default {
     }
     
     a{
+        color: blue;
+    }
+
+    a:hover{
         text-decoration: underline;
     }
 </style>

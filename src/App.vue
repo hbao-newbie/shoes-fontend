@@ -10,7 +10,7 @@
 </script>
 
 <template>
-    <HeaderVue/>
+    <HeaderVue class="header"/>
     <router-view></router-view>
     <FooterVue/>
 </template>
