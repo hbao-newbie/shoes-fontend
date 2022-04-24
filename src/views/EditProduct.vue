@@ -47,7 +47,7 @@ export default {
             try {
                 await productService.update(this.product._id, data);
                 swtoast.success({
-					text: "Liên hệ được cập nhật thành công.",
+					text: "Sản phẩm được cập nhật thành công.",
 				});
                 this.$router.push({ name: "User" });
             } catch (error) {
@@ -61,7 +61,7 @@ export default {
         async deleteProduct() {
             swalert
 				.fire({
-					title: "Xóa Liên hệ",
+					title: "Xóa sản phẩm",
 					icon: "warning",
 					text: "Bạn muốn xóa sản phẩm này?",
 					showCloseButton: true,

@@ -131,4 +131,8 @@ export default {
 .margin {
     margin-top: 15px;
 }
+
+.alert {
+	margin-top: 10px;
+}
 </style>
